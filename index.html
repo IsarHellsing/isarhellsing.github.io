@@ -621,6 +621,7 @@ function renderQuestion(){
 
 function selectAnswer(chosen, chosenIndex, storeOriginalIndex){
   if(S.answered)return;
+  
   S.answered=true;
 
   const q=S.questions[S.current];

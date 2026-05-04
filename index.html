@@ -591,6 +591,26 @@ function openChapter(id){
   document.getElementById('quizChapterLabel').textContent=`CH.${ch.num} — ${ch.name.toUpperCase()}`;
   showScreen('quizScreen');renderQuestion();
 }
+function shuffle(array) {
+  let currentIndex = array.length;
+//store orignal indices before shuffle in an array to keep track of correct answer's new position
+  const og = array.map((item, index) => index);
+  // While there remain elements to shuffle...
+  while (currentIndex != 0) {
+// move the stored indexes so that the original array keeps track of the new positions after shuffle
+    const randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    [og[currentIndex], og[randomIndex]] = [og[randomIndex], og[currentIndex]];
+    // Pick a remaining element...
+
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+  return { array, ogiginalIndex: og };
+}
+
 
 function renderQuestion(){
   S.answered=false;
@@ -621,7 +641,7 @@ function renderQuestion(){
 
 function selectAnswer(chosen, chosenIndex, storeOriginalIndex){
   if(S.answered)return;
-  
+
   S.answered=true;
 
   const q=S.questions[S.current];
